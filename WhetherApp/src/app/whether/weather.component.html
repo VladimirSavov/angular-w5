@@ -1,0 +1,19 @@
+<div class="d-flex flex-column weather-container px-0 mt-3 h-100">
+    <form class="container px-0 input-container px-0 px-0">
+        <label class="fs-3 form-label mb-3">Weather at your fingertips.</label>
+        <!-- <input type="text" class="form-control" formControlName="city" /> -->
+        <input type="text" placeholder="Enter City..." matInput [formControl]="cityForm" [matAutocomplete]="auto"
+            class="form-control bg-transparent" [ngClass]="{'text-white border-grey': getTheme()}" />
+        <mat-autocomplete #auto="matAutocomplete" classlist='bg-transparent text-white'
+            [ngClass]="{'bg-transparent': getTheme()}">
+            <mat-option *ngFor="let city of cities" [value]="city.name" (onSelectionChange)='logSelection($event, city)'
+                [ngClass]="{'text-light': getTheme(), 'bg-dark': getTheme()}">{{
+                city?.name }}
+                <img src="https://flagcdn.com/16x12/{{city?.sys?.country | lowercase}}.png" />
+            </mat-option>
+        </mat-autocomplete>
+        <!-- <button class="btn btn-info">Search</button> -->
+    </form>
+
+    <router-outlet></router-outlet>
+</div>
